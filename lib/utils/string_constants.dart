@@ -5,7 +5,7 @@ import '../widgets/constant_widgets.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 
-String baseUrl = "https://uatapi.tharpay.co.in";
+String baseUrl = "https://demo0413095.mockable.io/digitalflake/api/";
 RxBool isTokenValid = false.obs;
 RxBool isInternetAvailable = false.obs;
 

@@ -1,9 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_task/routes/routes.dart';
 import 'package:flutter_task/widgets/button.dart';
 import 'package:flutter_task/widgets/text_field.dart';
 import 'package:get/get.dart';
 
+import '../controllers/auth_controller.dart';
+import '../controllers/network_controller.dart';
 import '../utils/app_colors.dart';
 import '../utils/text_styles.dart';
 class SignupScreen extends StatefulWidget {
@@ -15,11 +18,11 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController mobileController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
+  AuthController  authController = Get.find();
+  NetworkController networkController = Get.put(NetworkController(), permanent: true);
 
-  final GlobalKey<FormState> signupkey = GlobalKey<FormState>();
+
+  final GlobalKey<FormState> signUpKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,7 @@ class _SignupScreenState extends State<SignupScreen> {
         child: Column(
           children: [
             Form(
-              key: signupkey,
+              key: signUpKey,
               child: Column(
                 children: [
                   Padding(
@@ -49,7 +52,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                   CustomTextField(
-                    controller: nameController,
+                    controller: authController.nameSignUpController,
                     validator: (val)
                     {
                       if(val!.isEmpty)
@@ -72,7 +75,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                   CustomTextField(
-                    controller: mobileController,
+                    controller: authController.mobileSignUpController,
                     validator: (val)
                     {
                       if(val!.isEmpty)
@@ -95,7 +98,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                   CustomTextField(
-                    controller: emailController,
+                    controller: authController.emailSignUpController,
                     validator: (val)
                     {
                       if(val!.isEmpty)
@@ -111,11 +114,14 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   SizedBox(height: 180,),
                   CommonButton(
-                    onPressed: ()
+                    onPressed: () async
                     {
-                      if(signupkey.currentState!.validate())
+                      if(signUpKey.currentState!.validate())
                         {
-                          Get.toNamed("/login_screen");
+                          bool result = await authController.createAccountAPI();
+                          if(result == true){
+                            Get.toNamed(Routes.COWORKING_SCREEN);
+                          }
                         }
                     },
                     label:"Create an account",
@@ -132,7 +138,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     TextSpan(
                         recognizer:TapGestureRecognizer()..onTap = ()
                         {
-                          Get.toNamed("/login_screen");
+                          Get.toNamed(Routes.LOGIN_SCREEN);
                         }  ,
                         text: " Log in",style: TextStyle(color: Color(0xff2A1D8B))
                     ),

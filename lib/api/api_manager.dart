@@ -19,7 +19,6 @@ class APIManager {
     try {
       // Check internet is on or not
       if (isInternetAvailable.value == true) {
-        showLoaderIfNeeded(isLoaderShow);
         await http.get(Uri.parse(url)).timeout(Duration(seconds: timeOut)).then((response) {
           log('\x1B[90m<--------------------------- [GET API] --------------------------->\x1B[0m');
           log('\x1B[94m[Url] => \x1B[95m$url\x1B[0m');
@@ -37,7 +36,6 @@ class APIManager {
     } catch (error, stackTrace) {
       handleGenericError(error, stackTrace);
     } finally {
-      hideLoaderIfNeeded(isLoaderShow);
     }
     return responseJson;
   }
@@ -48,7 +46,6 @@ class APIManager {
     try {
       // Check internet is on or not
       if (isInternetAvailable.value == true) {
-        showLoaderIfNeeded(isLoaderShow);
         String body = json.encode(params);
         await http.post(Uri.parse(url),body: body).timeout(Duration(seconds: timeOut)).then((response) {
           log('\x1B[90m<--------------------------- [POST API] --------------------------->\x1B[0m');
@@ -59,7 +56,7 @@ class APIManager {
           responseJson = _response(response);
         });
       } else {
-        // handleNoInternet();
+        handleNoInternet();
       }
     } on SocketException catch (error) {
       handleSocketException(error);
@@ -68,23 +65,9 @@ class APIManager {
     } catch (error, stackTrace) {
       handleGenericError(error, stackTrace);
     } finally {
-      hideLoaderIfNeeded(isLoaderShow);
     }
     return responseJson;
   }
-
-  void showLoaderIfNeeded(bool isLoaderShow) {
-    if (isLoaderShow) {
-      showProgressIndicator();
-    }
-  }
-
-  void hideLoaderIfNeeded(bool isLoaderShow) {
-    if (isLoaderShow) {
-      dismissProgressIndicator();
-    }
-  }
-
 
   void handleNoInternet() {
     if (isNoInternetMessageDisplayed == false) {

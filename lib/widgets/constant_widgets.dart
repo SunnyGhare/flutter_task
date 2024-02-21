@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import '../utils/app_colors.dart';
@@ -123,22 +122,6 @@ errorSnackBar({String title = 'Failure', String? message}) {
     ),
   );
 }
-
-// Show progress indicator
-showProgressIndicator() {
-  return EasyLoading.show(
-    maskType: EasyLoadingMaskType.black,
-    status: 'Loading',
-    dismissOnTap: false,
-  );
-}
-
-// Dismiss progress indicator
-dismissProgressIndicator() {
-  return EasyLoading.dismiss();
-}
-
-
 
 // Custom dialog
 Future<dynamic> customSimpleDialog({

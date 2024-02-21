@@ -1,9 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_task/controllers/auth_controller.dart';
+import 'package:flutter_task/routes/routes.dart';
 import 'package:flutter_task/widgets/button.dart';
 import 'package:flutter_task/widgets/text_field.dart';
 import 'package:get/get.dart';
-
 import '../utils/app_colors.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -14,12 +15,10 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController mobileController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
+  AuthController authController = Get.find();
 
-  final GlobalKey<FormState> signupkey = GlobalKey<FormState>();
-  bool selected = true;
+  final GlobalKey<FormState> loginKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           children: [
             Form(
-              key: signupkey,
+              key: loginKey,
               child: Column(
                 children: [
                     Padding(
@@ -59,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   CustomTextField(
-                    controller: nameController,
+                    controller: authController.emailController,
                     validator: (val)
                     {
                       if(val!.isEmpty)
@@ -82,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   CustomTextField(
-                    controller: mobileController,
+                    controller: authController.passwordController,
                     validator: (val)
                     {
                       if(val!.isEmpty)
@@ -95,22 +94,27 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     fillColor: ColorsForApp.textfieldColor,
                     filled: true,
-                    obscureText: selected,
+                    obscureText: authController.selected.value,
                     suffixIcon: GestureDetector(
                       onTap: (){
                         setState(() {
-                          selected =! selected;
+                          authController.selected.value =! authController.selected.value;
                         });
                       },
-                        child: selected?Icon(Icons.remove_red_eye):Icon(Icons.visibility_off_outlined)),
+                        child: authController.selected.value?Icon(Icons.remove_red_eye):Icon(Icons.visibility_off_outlined)),
                   ),
                   SizedBox(height: 180,),
                   CommonButton(
-                    onPressed: ()
+                    onPressed: () async
                     {
-                      if(signupkey.currentState!.validate())
+                      print("sgongds"
+                      );
+                      if(loginKey.currentState!.validate())
                       {
-                        Get.toNamed("/coworking_screen");
+                        bool result = await authController.loginAPI();
+                        if(result == true){
+                          Get.toNamed(Routes.COWORKING_SCREEN);
+                        }
                       }
                     },
                     label:"Log in",
@@ -127,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextSpan(
                           recognizer:TapGestureRecognizer()..onTap = ()
                           {
-                            Get.toNamed("/sign_up_screen");
+                            Get.toNamed(Routes.SIGN_UP_SCREEN);
                           }  ,
                           text: " Create an account",style: TextStyle(color: Color(0xff2A1D8B))
                       ),

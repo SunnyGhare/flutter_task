@@ -22,8 +22,7 @@ class MyApp extends StatelessWidget {
           darkTheme: KTheme.dark_theme,
           themeMode:ThemeMode.system,
           smartManagement: SmartManagement.full,
-
-          getPages: AppPages.pages,
+          getPages: AppPages.routes,
           initialRoute:AppPages.INITIAL_ROUTE,
         );
       },

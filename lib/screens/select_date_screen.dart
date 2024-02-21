@@ -1,5 +1,9 @@
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_task/controllers/slot_controller.dart';
+import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
+
 class SelectDateScreen extends StatefulWidget {
   const SelectDateScreen({super.key});
 
@@ -8,10 +12,11 @@ class SelectDateScreen extends StatefulWidget {
 }
 
 class _SelectDateScreenState extends State<SelectDateScreen> {
-  bool selectedValue = false;
+
+  SlotController slotController = Get.find();
+
   @override
   Widget build(BuildContext context) {
-    var mediaQuery = MediaQuery.of(context);
     return Scaffold(
       body: Column(
         children: [
@@ -41,32 +46,25 @@ class _SelectDateScreenState extends State<SelectDateScreen> {
                 onDateChange: (date) {
                   // New date selected
                   setState(() {
-                    selectedValue =! selectedValue;
+                    slotController.selectedValue.value =! slotController.selectedValue.value;
                   });
                 },
               ),
             ),
           ),
-          // Row(
-          //   children: [
-          //     Padding(
-          //       padding: const EdgeInsets.all(16.0),
-          //       child: Container(
-          //         height: mediaQuery.size.height*0.07,
-          //         width: mediaQuery.size.width*0.41,
-          //         color: Colors.pink,
-          //       ),
-          //     ),
-          //     Padding(
-          //       padding: const EdgeInsets.all(16.0),
-          //       child: Container(
-          //         height: mediaQuery.size.height*0.07,
-          //         width: mediaQuery.size.width*0.41,
-          //         color: Colors.pink,
-          //       ),
-          //     ),
-          //   ],
-          // )
+          GridView.builder(
+            shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2
+    ),
+              itemBuilder: (context,index){
+                return Container(
+                  height: 3.h,
+                  width: 10.w,
+                  color: Colors.purple,
+                );
+              }
+          )
 
         ],
       )
