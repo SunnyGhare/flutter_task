@@ -35,34 +35,37 @@ class CommonButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPressed,
-      child: Container(
-        height: height ?? 5.5.h,
-        width: width ?? 100.w,
-        decoration: BoxDecoration(
-          color: bgColor ?? ColorsForApp.primaryColor,
-          borderRadius: BorderRadius.circular(100),
-          border: border ??
-              Border.all(
-                width: 0,
-                color: bgColor ?? ColorsForApp.primaryColor,
+      child: Padding(
+        padding: const EdgeInsets.all(27),
+        child: Container(
+          height: height ?? 5.5.h,
+          width: width ?? 100.w,
+          decoration: BoxDecoration(
+            color: bgColor ?? ColorsForApp.primaryColor,
+            borderRadius: BorderRadius.circular(10),
+            border: border ??
+                Border.all(
+                  width: 0,
+                  color: bgColor ?? ColorsForApp.primaryColor,
+                ),
+            boxShadow: [
+              BoxShadow(
+                offset: const Offset(0, 2),
+                color: shadowColor ?? ColorsForApp.shadowColor,
+                blurRadius: 5,
+                spreadRadius: -2,
               ),
-          boxShadow: [
-            BoxShadow(
-              offset: const Offset(0, 2),
-              color: shadowColor ?? ColorsForApp.shadowColor,
-              blurRadius: 5,
-              spreadRadius: -2,
-            ),
-          ],
-        ),
-        alignment: Alignment.center,
-        child: Text(
-          label,
-          style: style ??
-              TextHelper.size16.copyWith(
-                fontFamily: mediumFont,
-                color: labelColor ?? ColorsForApp.whiteColor,
-              ),
+            ],
+          ),
+          alignment: Alignment.center,
+          child: Text(
+            label,
+            style: style ??
+                TextHelper.size16.copyWith(
+                  fontFamily: mediumFont,
+                  color: labelColor ?? ColorsForApp.whiteColor,
+                ),
+          ),
         ),
       ),
     );

@@ -90,66 +90,69 @@ class CustomTextField extends StatelessWidget {
     return SizedBox(
       // height: height ?? 55,
       width: width,
-      child: TextFormField(
-        style: style ??
-            TextHelper.size15.copyWith(
-              fontFamily: mediumFont,
-              color: ColorsForApp.blackColor,
-            ),
-        cursorColor: cursorColor ?? ColorsForApp.primaryColor,
-        onSaved: onSaved,
-        autofocus: false,
-        onChanged: onChange,
-        onFieldSubmitted: onSubmitted,
-        obscureText: obscureText ?? false,
-        textAlignVertical: TextAlignVertical.center,
-        controller: controller,
-        maxLength: maxLength,
-        textDirection: textDirection,
-        textInputAction: textInputAction ?? TextInputAction.next,
-        inputFormatters: inputFormatters,
-        keyboardType: keyboardType,
-        maxLines: maxLines ?? 1,
-        validator: validator,
-        onTap: onTap,
-        readOnly: readOnly,
-        enableSuggestions: true,
-        autovalidateMode: autovalidateMode ?? AutovalidateMode.onUserInteraction,
-        textCapitalization: textCapitalization ?? TextCapitalization.none,
-        decoration: decoration ??
-            InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(7),
-                borderSide: BorderSide(
-                  color: borderColor ?? ColorsForApp.grayScale500.withOpacity(0.3),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 27,right: 27,top: 10),
+        child: TextFormField(
+          style: style ??
+              TextHelper.size15.copyWith(
+                fontFamily: mediumFont,
+                color: ColorsForApp.blackColor,
+              ),
+          cursorColor: cursorColor ?? ColorsForApp.primaryColor,
+          onSaved: onSaved,
+          autofocus: false,
+          onChanged: onChange,
+          onFieldSubmitted: onSubmitted,
+          obscureText: obscureText ?? false,
+          textAlignVertical: TextAlignVertical.center,
+          controller: controller,
+          maxLength: maxLength,
+          textDirection: textDirection,
+          textInputAction: textInputAction ?? TextInputAction.next,
+          inputFormatters: inputFormatters,
+          keyboardType: keyboardType,
+          maxLines: maxLines ?? 1,
+          validator: validator,
+          onTap: onTap,
+          readOnly: readOnly,
+          enableSuggestions: true,
+          autovalidateMode: autovalidateMode ?? AutovalidateMode.onUserInteraction,
+          textCapitalization: textCapitalization ?? TextCapitalization.none,
+          decoration: decoration ??
+              InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(7),
+                  borderSide: BorderSide(
+                    color: borderColor ?? ColorsForApp.grayScale500.withOpacity(0.3),
+                  ),
                 ),
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(7),
-                borderSide: BorderSide(
-                  color: borderColor ?? ColorsForApp.grayScale500.withOpacity(0.3),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(7),
+                  borderSide: BorderSide(
+                    color: borderColor ?? ColorsForApp.grayScale500.withOpacity(0.3),
+                  ),
                 ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(7),
-                borderSide: BorderSide(
-                  color: focusedBorderColor ?? ColorsForApp.primaryColor,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(7),
+                  borderSide: BorderSide(
+                    color: focusedBorderColor ?? ColorsForApp.primaryColor,
+                  ),
                 ),
+                contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                counterText: isShowCounterText ? null : '',
+                labelStyle: TextHelper.size16,
+                prefixIcon: prefixIcon,
+                suffixIcon: suffixIcon,
+                hintText: hintText,
+                hintStyle: TextHelper.size14.copyWith(
+                  color: hintTextColor ?? ColorsForApp.grayScale500,
+                ),
+                errorText: errorText,
+                fillColor: fillColor ?? ColorsForApp.hintColor,
+                filled: filled,
               ),
-              contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              floatingLabelBehavior: FloatingLabelBehavior.never,
-              counterText: isShowCounterText ? null : '',
-              labelStyle: TextHelper.size16,
-              prefixIcon: prefixIcon,
-              suffixIcon: suffixIcon,
-              hintText: hintText,
-              hintStyle: TextHelper.size14.copyWith(
-                color: hintTextColor ?? ColorsForApp.grayScale500,
-              ),
-              errorText: errorText,
-              fillColor: fillColor ?? ColorsForApp.hintColor,
-              filled: filled,
-            ),
+        ),
       ),
     );
   }

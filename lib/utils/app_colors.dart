@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ColorsForApp {
-  static Color primaryColor = ColorConverter.hexToColor("#0A1852");
+  static Color textfieldColor = Color(0xffDADADA);
+  static Color textColor = Color(0xff494949);
+  static Color primaryColor = Color(0xff5167EB);
   static Color primaryColorBlue = const Color(0xff2255e1);
   static Color stepBgColor = ColorConverter.hexToColor("#e4ecff");
   static Color stepBorderColor = ColorConverter.hexToColor("#b5c4ee");
