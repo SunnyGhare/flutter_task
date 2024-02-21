@@ -15,36 +15,3 @@ const loginDataKey = 'loginDataKey';
 const apiTimeOutMsg = 'Request timeout, please try again!';
 const noInternetMsg = 'Please check your internet connection';
 
-// Get stored login details
-LoginModel getStoredLoginDetails() {
-  LoginModel loginModel = LoginModel();
-  var data = GetStorage().read(loginDataKey);
-  if (data != null) {
-    loginModel = LoginModel.fromJson(GetStorage().read(loginDataKey));
-  }
-  return loginModel;
-}
-
-
-
-// Get stored user auth token
-String getAuthToken() {
-  LoginModel loginModel = getStoredLoginDetails();
-  if (loginModel.accessToken != null && loginModel.accessToken!.isNotEmpty) {
-    bool isTokenExpired = JwtDecoder.isExpired(loginModel.accessToken!);
-    if (isTokenExpired == true) {
-      isTokenValid.value = false;
-      Timer(const Duration(seconds: 1), () {
-        Get.offNamed(Routes.AUTH_SCREEN);
-        errorSnackBar(message: 'Your session has expired!');
-      });
-      return '';
-    } else {
-      isTokenValid.value = true;
-      return loginModel.accessToken!;
-    }
-  } else {
-    isTokenValid.value = false;
-    return '';
-  }
-}

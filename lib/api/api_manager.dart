@@ -4,7 +4,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import '../widgets/constant_widgets.dart';
 import '../utils/string_constants.dart';
@@ -21,11 +20,9 @@ class APIManager {
       // Check internet is on or not
       if (isInternetAvailable.value == true) {
         showLoaderIfNeeded(isLoaderShow);
-        var headers = createHeaders();
-        await http.get(Uri.parse(url), headers: headers).timeout(Duration(seconds: timeOut)).then((response) {
+        await http.get(Uri.parse(url)).timeout(Duration(seconds: timeOut)).then((response) {
           log('\x1B[90m<--------------------------- [GET API] --------------------------->\x1B[0m');
           log('\x1B[94m[Url] => \x1B[95m$url\x1B[0m');
-          log('\x1B[94m[Headers] => \x1B[95m$headers\x1B[0m');
           log('\x1B[94m[Response (${response.statusCode})] => \x1B[96m${response.statusCode == 200 ? response.body : response.reasonPhrase}\x1B[0m');
           log('\x1B[90m<----------------------------------------------------------------->\x1B[0m');
           responseJson = _response(response);
@@ -52,12 +49,10 @@ class APIManager {
       // Check internet is on or not
       if (isInternetAvailable.value == true) {
         showLoaderIfNeeded(isLoaderShow);
-        var headers = createHeaders();
         String body = json.encode(params);
-        await http.post(Uri.parse(url), headers: headers, body: body).timeout(Duration(seconds: timeOut)).then((response) {
+        await http.post(Uri.parse(url),body: body).timeout(Duration(seconds: timeOut)).then((response) {
           log('\x1B[90m<--------------------------- [POST API] --------------------------->\x1B[0m');
           log('\x1B[94m[Url] => \x1B[95m$url\x1B[0m');
-          log('\x1B[94m[Headers] => \x1B[95m$headers\x1B[0m');
           log('\x1B[94m[Parameters] => \x1B[95m$body\x1B[0m');
           log('\x1B[94m[Response (${response.statusCode})] => \x1B[96m${response.statusCode == 200 ? response.body : response.reasonPhrase}\x1B[0m');
           log('\x1B[90m<----------------------------------------------------------------->\x1B[0m');
@@ -65,39 +60,6 @@ class APIManager {
         });
       } else {
         // handleNoInternet();
-      }
-    } on SocketException catch (error) {
-      handleSocketException(error);
-    } on TimeoutException catch (_) {
-      handleTimeoutException();
-    } catch (error, stackTrace) {
-      handleGenericError(error, stackTrace);
-    } finally {
-      hideLoaderIfNeeded(isLoaderShow);
-    }
-    return responseJson;
-  }
-
-  // PUT
-  Future<dynamic> putAPICall({required String url, required var params, bool isLoaderShow = true, int timeOut = 60}) async {
-    var responseJson;
-    try {
-      // Check internet is on or not
-      if (isInternetAvailable.value == true) {
-        showLoaderIfNeeded(isLoaderShow);
-        var headers = createHeaders();
-        String body = json.encode(params);
-        await http.put(Uri.parse(url), headers: headers, body: body).timeout(Duration(seconds: timeOut)).then((response) {
-          log('\x1B[90m<--------------------------- [PUT API] --------------------------->\x1B[0m');
-          log('\x1B[94m[Url] => \x1B[95m$url\x1B[0m');
-          log('\x1B[94m[Headers] => \x1B[95m$headers\x1B[0m');
-          log('\x1B[94m[Parameters] => \x1B[95m$body\x1B[0m');
-          log('\x1B[94m[Response (${response.statusCode})] => \x1B[96m${response.statusCode == 200 ? response.body : response.reasonPhrase}\x1B[0m');
-          log('\x1B[90m<----------------------------------------------------------------->\x1B[0m');
-          responseJson = _response(response);
-        });
-      } else {
-        handleNoInternet();
       }
     } on SocketException catch (error) {
       handleSocketException(error);
@@ -123,22 +85,6 @@ class APIManager {
     }
   }
 
-  Map<String, String> createHeaders() {
-    if (isTokenValid.value == true) {
-      return GetStorage().read(loginDataKey) != null && getAuthToken().isNotEmpty
-          ? {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ${getAuthToken()}',
-            }
-          : {
-              'Content-Type': 'application/json',
-            };
-    } else {
-      return {
-        'Content-Type': 'application/json',
-      };
-    }
-  }
 
   void handleNoInternet() {
     if (isNoInternetMessageDisplayed == false) {
