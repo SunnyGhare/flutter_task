@@ -42,6 +42,7 @@ class AuthController extends GetxController{
     }
   }
 
+
   Future<bool> createAccountAPI({bool isLoaderShow = true}) async {
     try {
       CreateAccountModel createAccountModel = await authRepository.createAccountApiCall(isLoaderShow: isLoaderShow, params: {

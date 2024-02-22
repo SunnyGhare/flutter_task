@@ -20,8 +20,6 @@ class _SignupScreenState extends State<SignupScreen> {
 
   AuthController  authController = Get.find();
   NetworkController networkController = Get.put(NetworkController(), permanent: true);
-
-
   final GlobalKey<FormState> signUpKey = GlobalKey<FormState>();
 
   @override
@@ -39,7 +37,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     padding:EdgeInsets.only(top: 90,left: 27),
                     child: Row(
                       children: [
-                        Center(child: Text("Create an Account",style:TextHelper.h5)),
+                        Center(child: Text("Create an Account",style:TextHelper.h5.copyWith(fontWeight: FontWeight.w400))),
                       ],
                     ),
                   ),
@@ -47,7 +45,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     padding: const EdgeInsets.only(top: 30,left: 27),
                     child: Row(
                       children: [
-                        Center(child: Text("Full name",style: TextHelper.h6.copyWith(color: ColorsForApp.textColor,fontSize: 16)))
+                        Center(child: Text("Full name",style: TextHelper.h6.copyWith(color: ColorsForApp.textColor,fontSize: 16,fontWeight: FontWeight.w400)))
                       ],
                     ),
                   ),
@@ -70,7 +68,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     padding: const EdgeInsets.only(top: 30,left: 27),
                     child: Row(
                       children: [
-                        Center(child: Text("Mobile number",style: TextStyle(color: ColorsForApp.textColor,fontSize: 16),))
+                        Center(child: Text("Mobile number",style: TextStyle(color: ColorsForApp.textColor,fontSize: 16,fontWeight: FontWeight.w400),))
                       ],
                     ),
                   ),
@@ -93,7 +91,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     padding: const EdgeInsets.only(top: 30,left: 27),
                     child: Row(
                       children: [
-                        Center(child: Text("Email ID",style: TextStyle(color: ColorsForApp.textColor,fontSize: 16),))
+                        Center(child: Text("Email ID",style: TextStyle(color: ColorsForApp.textColor,fontSize: 16,fontWeight: FontWeight.w400),))
                       ],
                     ),
                   ),
@@ -133,14 +131,14 @@ class _SignupScreenState extends State<SignupScreen> {
                 text: TextSpan(
                   children: [
                     TextSpan(
-                      text: "Existing user?",style: TextStyle(color: Color(0xff626262))
+                      text: "Existing user?",style: TextStyle(color: Color(0xff626262),fontWeight: FontWeight.w400)
                     ),
                     TextSpan(
                         recognizer:TapGestureRecognizer()..onTap = ()
                         {
                           Get.toNamed(Routes.LOGIN_SCREEN);
                         }  ,
-                        text: " Log in",style: TextStyle(color: Color(0xff2A1D8B))
+                        text: " Log in",style: TextStyle(color: Color(0xff2A1D8B),fontWeight: FontWeight.w400)
                     ),
                   ]
                 ))

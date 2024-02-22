@@ -42,12 +42,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   Padding(
-                    padding:EdgeInsets.only(left: 140,top: 5),
-                    child: Row(
-                      children: [
-                        Center(child: Text("Co-working",style:TextStyle(color: Colors.black,fontSize: 24))),
-                      ],
-                    ),
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Container(
+                        child: Center(child: Text("Co-working",style:TextStyle(color: Colors.black,fontSize: 24)))),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 70,left: 27),
@@ -58,6 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   CustomTextField(
+                    keyboardType: TextInputType.emailAddress,
                     controller: authController.emailController,
                     validator: (val)
                     {
@@ -81,6 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   CustomTextField(
+                    keyboardType: TextInputType.numberWithOptions(),
                     controller: authController.passwordController,
                     validator: (val)
                     {
@@ -103,12 +102,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                         child: authController.selected.value?Icon(Icons.remove_red_eye):Icon(Icons.visibility_off_outlined)),
                   ),
-                  SizedBox(height: 180,),
+                  SizedBox(height: 150,),
                   CommonButton(
                     onPressed: () async
                     {
-                      print("sgongds"
-                      );
+                      print("sgongds");
                       if(loginKey.currentState!.validate())
                       {
                         bool result = await authController.loginAPI();
@@ -117,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                       }
                     },
-                    label:"Log in",
+                    label:"Log in",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.white),
                     bgColor:Color(0xff5167EB),)
                 ],
               ),
@@ -133,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           {
                             Get.toNamed(Routes.SIGN_UP_SCREEN);
                           }  ,
-                          text: " Create an account",style: TextStyle(color: Color(0xff2A1D8B))
+                          text: " Create an account",style: TextStyle(color: Color(0xff2A1D8B),fontWeight: FontWeight.w500)
                       ),
                     ]
                 ))

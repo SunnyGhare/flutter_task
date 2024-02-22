@@ -83,7 +83,6 @@ class CustomTextField extends StatelessWidget {
     this.borderColor,
     this.focusedBorderColor,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     List<TextInputFormatter>? inputFormatters = (textInputFormatter != null && textInputFormatter!.isNotEmpty) ? [NoSpaceInputFormatter(), ...textInputFormatter!] : [NoSpaceInputFormatter()];

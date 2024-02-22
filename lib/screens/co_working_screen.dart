@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task/controllers/booking_controller.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 import '../routes/routes.dart';
 class CoworkingScreen extends StatefulWidget {
@@ -13,13 +14,12 @@ class CoworkingScreen extends StatefulWidget {
 class _CoworkingScreenState extends State<CoworkingScreen> {
 
   BookingController bookingController = Get.find();
-
+  bool select = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Obx(()=>
-         Column(
+      body:Column(
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 76,left: 40),
@@ -29,14 +29,19 @@ class _CoworkingScreenState extends State<CoworkingScreen> {
                   Text(" Co-working",style: TextStyle(color: Color(0xff534F4F)),),
                   Padding(
                     padding: const EdgeInsets.only(left: 95),
-                    child: Container(
-                      height: 30,
-                      width: 131,
-                      decoration: BoxDecoration(
-                        color: Color(0xff5167EB),
-                        borderRadius: BorderRadius.circular(7)
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.toNamed(Routes.BOOKING_HISTORY_SCREEN);
+                      },
+                      child: Container(
+                        height: 30,
+                        width: 131,
+                        decoration: BoxDecoration(
+                          color: Color(0xff5167EB),
+                          borderRadius: BorderRadius.circular(7)
+                        ),
+                        child: Center(child: Text("Booking history",style: TextStyle(color: Color(0xffFFFFFF)),)),
                       ),
-                      child: Center(child: Text("Booking history",style: TextStyle(color: Color(0xffFFFFFF)),)),
                     ),
                   )
                 ],
@@ -49,14 +54,16 @@ class _CoworkingScreenState extends State<CoworkingScreen> {
                   ),
                   child: GestureDetector(
                     onTap: (){
-                        bookingController.val.value = 1;
-                        Get.toNamed(Routes.SELECT_DATE_SCREEN);
+                          setState(() {
+                            select =! select;
+                          });
+                          Get.toNamed(Routes.SELECT_SLOT_SCREEN);
                     },
                     child: Container(
                       height: 147,
                       width: 147,
-                      decoration: BoxDecoration(
-                        color:bookingController.val.value == 1? Color(0xff4D60D1):Color(0xffC7CFFc),
+                      decoration:BoxDecoration(
+                        color:select? Color(0xff4D60D1):Color(0xffC7CFFc),
                         borderRadius: BorderRadius.circular(15),
                         image: DecorationImage(
                             image: AssetImage("assets/images/bookwork_image.png")
@@ -69,14 +76,16 @@ class _CoworkingScreenState extends State<CoworkingScreen> {
                   padding: const EdgeInsets.only(top: 80,left: 25),
                   child: GestureDetector(
                     onTap: (){
-                        bookingController.val.value = 2;
-                        Get.toNamed(Routes.SELECT_DATE_SCREEN);
+                        setState(() {
+                          select =! select;
+                        });
+                        Get.toNamed(Routes.SELECT_SLOT_SCREEN);
                     },
                     child: Container(
                       height: 147,
                       width: 147,
                       decoration: BoxDecoration(
-                          color: bookingController.val.value == 2?Color(0xff4D60D1):Color(0xffC7CFFc),
+                          color:select?Color(0xffC7CFFc):Color(0xff4D60D1),
                           borderRadius: BorderRadius.circular(15),
                       ),
                       child: Padding(
@@ -84,7 +93,7 @@ class _CoworkingScreenState extends State<CoworkingScreen> {
                         child: Row(
                           children: [
                             Container(
-                              height: 83,
+                              height:8.h,
                               width: 83,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
@@ -102,7 +111,6 @@ class _CoworkingScreenState extends State<CoworkingScreen> {
             )
           ],
         ),
-      ),
     );
   }
 }
