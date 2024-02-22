@@ -74,7 +74,7 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
             child: CommonButton(
                 onPressed: ()
                 {
-
+                  showCommonMessageDialog(context, "Confirm Booking", "");
                 },
                 label: "Book Desk"
             ),

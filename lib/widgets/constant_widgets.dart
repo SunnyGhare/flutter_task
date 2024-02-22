@@ -270,6 +270,7 @@ showCommonMessageDialog(BuildContext context, String title, String message) {
           title,
           style: TextHelper.size20.copyWith(
             fontFamily: mediumFont,
+            color: Colors.white
           ),
         ),
         content: Text(
