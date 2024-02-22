@@ -8,6 +8,4 @@ class Routes
   static String BOOKING_HISTORY_SCREEN = "/booking_history_screen";
   static String AVAILABILITY_SCREEN = "/availability_screen";
   static String NO_INTERNET_CONNECTION_SCREEN = "/no_internet_connection_screen";
-
-
 }

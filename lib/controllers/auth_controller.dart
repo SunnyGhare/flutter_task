@@ -49,14 +49,18 @@ class AuthController extends GetxController{
         'email': emailController.text.trim(),
         'password': passwordController.text.trim(),
       });
-      if(createAccountModel.message == "Account created successfully"){
+      if(createAccountModel.message == "Account created successfully")
+      {
         successSnackBar(message: createAccountModel.message);
         return true;
-      }else{
+      }
+      else
+      {
         errorSnackBar(message: createAccountModel.message);
         return false;
       }
-    } catch (e) {
+    } catch (e)
+    {
       return false;
     }
   }

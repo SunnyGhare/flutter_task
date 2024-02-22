@@ -1,4 +1,3 @@
-
 import 'package:flutter_task/bindings/auth_binding.dart';
 import 'package:flutter_task/bindings/availability_binding.dart';
 import 'package:flutter_task/bindings/booking_binding.dart';
@@ -17,7 +16,7 @@ import '../screens/booking_history.dart';
 import '../screens/select_slot_screen.dart';
 class AppPages
 {
-  static String INITIAL_ROUTE = Routes.AVAILABILITY_SCREEN;
+  static String INITIAL_ROUTE = Routes.LOGIN_SCREEN;
   static final routes =
   [
     GetPage(
