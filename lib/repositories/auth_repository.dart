@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_task/models/AvailabilityModel.dart';
 import 'package:flutter_task/models/create_account_model.dart';
 
 import '../api/api_manager.dart';
@@ -15,7 +16,7 @@ class AuthRepository {
   //Login api
   Future<LoginModel> loginApiCall({required var params, bool isLoaderShow = true}) async {
     var jsonData = await apiManager.postAPICall(
-      url: 'https://demo0413095.mockable.io/digitalflake/api/login',
+      url: '${baseUrl}login',
       params: params,
       isLoaderShow: isLoaderShow,
     );
@@ -36,26 +37,33 @@ class AuthRepository {
   }
 
   //select Slot api
-  Future<SlotsModel> selectSlotApiCall({ required var params , bool isLoaderShow = true}) async{
+  Future<SlotsModel> selectSlotApiCall({bool isLoaderShow = true,required String date}) async{
     var jsonData = await apiManager.getAPICall(
-        url: 'https://demo0413095.mockable.io/digitalflake/api/get_slots?date=2023-05-01',
-    params:params,
-    isLoaderShow: isLoaderShow,
+        url: '${baseUrl}get_slots?date=$date',
+         isLoaderShow: isLoaderShow,
     );
     var response = SlotsModel.fromJson(jsonData);
     return response;
   }
 
   //booking history api
-  Future<List<BookingModel>> bookingHistoryApiCall ({ required var params , bool isLoaderShow = true}) async {
+  Future<BookingModel> bookingHistoryApiCall ({ required String userId , bool isLoaderShow = true}) async {
     var jsonData = await apiManager.getAPICall(
-        url: "https://demo0413095.mockable.io/digitalflake/api/get_bookings?user_id=1",
-        params: params,
+        url: "${baseUrl}get_bookings?user_id=$userId",
         isLoaderShow: isLoaderShow
          );
-    var response = jsonData as List;
-    List<BookingModel> objects =
-        response.map((e) => BookingModel.fromJson(e)).toList();
-        return objects;
+    var response = BookingModel.fromJson(jsonData);
+    return response;
   }
+
+  //booking history api
+  Future<AvailabilityModel> availabilityApiCall ({ required String date,required String slotId ,required String type, bool isLoaderShow = true}) async {
+    var jsonData = await apiManager.getAPICall(
+        url: "${baseUrl}get_availability?date=$date&slot_id=$slotId&type=$type",
+        isLoaderShow: isLoaderShow
+    );
+    var response = AvailabilityModel.fromJson(jsonData);
+    return response;
+  }
+
 }

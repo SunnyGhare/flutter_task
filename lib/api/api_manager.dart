@@ -14,7 +14,7 @@ class APIManager {
   bool isSessionExpiredMessageDisplayed = false;
 
   // GET
-  Future<dynamic> getAPICall({required String url, bool isLoaderShow = true, int timeOut = 60, required params}) async {
+  Future<dynamic> getAPICall({required String url, bool isLoaderShow = true, int timeOut = 60}) async {
     var responseJson;
     try {
       // Check internet is on or not

@@ -22,7 +22,7 @@ class _CoworkingScreenState extends State<CoworkingScreen> {
       body:Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 76,left: 40),
+              padding: const EdgeInsets.only(top: 76,left: 20),
               child: Row(
                 children: [
                   Image.asset("assets/images/coworking1.png",height:22,),
@@ -57,6 +57,7 @@ class _CoworkingScreenState extends State<CoworkingScreen> {
                           setState(() {
                             select =! select;
                           });
+                          bookingController.val.value = 1;
                           Get.toNamed(Routes.SELECT_SLOT_SCREEN);
                     },
                     child: Container(
@@ -79,6 +80,7 @@ class _CoworkingScreenState extends State<CoworkingScreen> {
                         setState(() {
                           select =! select;
                         });
+                        bookingController.val.value = 2;
                         Get.toNamed(Routes.SELECT_SLOT_SCREEN);
                     },
                     child: Container(

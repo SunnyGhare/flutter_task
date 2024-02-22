@@ -19,7 +19,6 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
 
   AuthController  authController = Get.find();
-  NetworkController networkController = Get.put(NetworkController(), permanent: true);
   final GlobalKey<FormState> signUpKey = GlobalKey<FormState>();
 
   @override
